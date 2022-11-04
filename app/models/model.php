@@ -37,4 +37,18 @@ class PropertyModel{
         $query = $this->db->prepare("UPDATE propiedades SET direccion=?,tipo=?,habitaciones=?,precio=?,alquiler_venta=? WHERE id_propiedad = ?");
         $query->execute([$direccion, $tipo, $habitaciones,$precio,$alquiler_venta,$id]);
     }
+
+    public function orderPropertiesAscHab(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY habitaciones ASC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesDescHab(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY habitaciones DESC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
 }

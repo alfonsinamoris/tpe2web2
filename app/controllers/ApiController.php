@@ -2,16 +2,19 @@
 
 require_once './app/models/model.php';
 require_once './app/views/api.view.php';
+require_once './app/helpers/AuthApi.helper.php';
 
 class ApiController {
     private $model;
     private $view;
     private $data;
+    private $authHelper;
 
     public function __construct(){
         $this->model = new PropertyModel();
         $this->view = new ApiView();
-        //lee el body del request
+        $this->authHelper = new AuthApiHelper();
+        
         $this->data = file_get_contents("php://input");
     }
 
@@ -20,8 +23,14 @@ class ApiController {
     }
 
     public function getProperties($params = null){
+        if($_GET["sort"] == "ASC"){
+            $properties = $this->model->orderPropertiesAscHab();//?sort=ASC
+        }elseif($_GET["sort"] == "DESC"){
+            $properties = $this->model->orderPropertiesDescHab();//?sort=DESC
+        } else{
         $properties = $this->model->getAll();
-        $this->view->response($properties);
+        }
+        return $this->view->response($properties, 200);
     }
 
     public function getProperty($params = null){
@@ -37,6 +46,11 @@ class ApiController {
 
     public function deleteProperty($params = null){
         $id = $params[':ID'];
+        //BARRERA DE SEGURIDAD
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
         $property = $this->model->get($id);
         if ($property){
             $this->model->delete($id);
@@ -70,4 +84,5 @@ class ApiController {
             $this->view->response ("la propiedad con el id=$id no existe", 404);
          }
     }
+
 }
