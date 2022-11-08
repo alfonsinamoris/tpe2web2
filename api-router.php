@@ -1,7 +1,6 @@
 <?php
 require_once './libs/Router.php';
 require_once './app/controllers/ApiController.php';
-require_once './app/controllers/AuthApiController.php';
 
 // crea el router
 $router = new Router();

@@ -52,6 +52,61 @@ class PropertyModel{
         return $properties;
     }
 
+    public function orderPropertiesAscID(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY id_propiedad ASC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesDescID(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY id_propiedad DESC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesAscDirec(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY direccion ASC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesDescDirec(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY direccion DESC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesAscTipo(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY tipo ASC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesDescTipo(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY tipo DESC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+
+    public function orderPropertiesAscPrecio(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY precio ASC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
+    
+    public function orderPropertiesDescPrecio(){
+        $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY precio ASC");
+        $query->execute();
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
 
     public function ShowByType($tipo){
         $query = $this->db->prepare("SELECT * FROM propiedades WHERE tipo = ?");

@@ -2,19 +2,15 @@
 
 require_once './app/models/model.php';
 require_once './app/views/api.view.php';
-require_once './app/helpers/AuthApi.helper.php';
 
 class ApiController {
     private $model;
     private $view;
     private $data;
-    private $authHelper;
 
     public function __construct(){
         $this->model = new PropertyModel();
-        $this->view = new ApiView();
-        $this->authHelper = new AuthApiHelper();
-        
+        $this->view = new ApiView();      
         $this->data = file_get_contents("php://input");
     }
 
@@ -22,20 +18,52 @@ class ApiController {
         return json_decode($this->data);
     }
 
-    public function getProperties($params = null){
+    public function getProperties(){
             if(isset($_GET['order'])&& isset($_GET['sortby'])){
-                if($_GET["order"] == "ASC"){
-                    if($_GET['sortby']=="habitaciones")
+                //FITRA ASC Y DESC POR HABITACIONES
+                if($_GET['sortby']=="habitaciones"){ 
+                    if($_GET['order']=="ASC"){
                         $properties = $this->model->orderPropertiesAscHab();//?sortby=habitaciones&order=ASC
+                    }elseif ($_GET["order"] == "DESC") {
+                        $properties = $this->model->orderPropertiesDescHab();//?sortby=habitaciones&order=DESC
+                    }
                 }
-                elseif($_GET["order"] == "DESC"){
-                    if($_GET['sortby']=="habitaciones")
-                    $properties = $this->model->orderPropertiesDescHab();//?sortby=habitaciones&order=DESC
+                //FILTRA ASC Y DESC POR ID
+                elseif($_GET["sortby"] == "id"){
+                    if($_GET['order']=="ASC")
+                        $properties = $this->model->orderPropertiesAscID();//?sortby=id&order=ASC
+                    elseif ($_GET["order"] == "DESC") {
+                        $properties = $this->model->orderPropertiesDescID();//?sortby=id&order=DESC
+                    }
                 }
+                //FILTRA ASC Y DESC POR DIRECCION
+                elseif($_GET["sortby"] == "direccion"){
+                    if($_GET['order']=="ASC")
+                        $properties = $this->model->orderPropertiesAscDirec();//?sortby=direccion&order=ASC
+                    elseif ($_GET["order"] == "DESC") {
+                        $properties = $this->model->orderPropertiesDescDirec();//?sortby=direccion&order=DESC
+                    }
+                }
+                //FILTRA ASC Y DESC POR TIPO
+                elseif($_GET["sortby"] == "tipo"){
+                    if($_GET['order']=="ASC")
+                        $properties = $this->model->orderPropertiesAscTipo();//?sortby=tipo&order=ASC
+                    elseif ($_GET["order"] == "DESC") {
+                        $properties = $this->model->orderPropertiesDescTipo();//?sortby=tipo&order=DESC
+                    }
+                }
+                //FILTRA ASC Y DESC POR PRECIO
+                elseif($_GET["sortby"] == "precio"){
+                    if($_GET['order']=="ASC")
+                        $properties = $this->model->orderPropertiesAscPrecio();//?sortby=precio&order=ASC
+                    elseif ($_GET["order"] == "DESC") {
+                        $properties = $this->model->orderPropertiesDescPrecio();//?sortby=precio&order=DESC
+                    }
+                }
+            }    
                elseif(isset($_GET['filterByType'])){
-                    $properties = $this->model->ShowByType($tipo);//?filterByType=tipo
+                    $properties = $this->model->ShowByType($_GET['filterByType']);//?filterByType=tipo
                 }
-            }
               else{
                  $properties = $this->model->getAll();
               } 
@@ -57,11 +85,6 @@ class ApiController {
 
     public function deleteProperty($params = null){
         $id = $params[':ID'];
-        //BARRERA DE SEGURIDAD
-        if(!$this->authHelper->isLoggedIn()){
-            $this->view->response("No estas logeado", 401);
-            return;
-        }
         $property = $this->model->get($id);
         if ($property){
             $this->model->delete($id);
