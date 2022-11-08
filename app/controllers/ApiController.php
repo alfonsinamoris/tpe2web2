@@ -23,14 +23,25 @@ class ApiController {
     }
 
     public function getProperties($params = null){
-        if($_GET["sort"] == "ASC"){
-            $properties = $this->model->orderPropertiesAscHab();//?sort=ASC
-        }elseif($_GET["sort"] == "DESC"){
-            $properties = $this->model->orderPropertiesDescHab();//?sort=DESC
-        } else{
-        $properties = $this->model->getAll();
-        }
-        return $this->view->response($properties, 200);
+            if(isset($_GET['order'])&& isset($_GET['sortby'])){
+                if($_GET["order"] == "ASC"){
+                    if($_GET['sortby']=="habitaciones")
+                        $properties = $this->model->orderPropertiesAscHab();//?sortby=habitaciones&order=ASC
+                }
+                elseif($_GET["order"] == "DESC"){
+                    if($_GET['sortby']=="habitaciones")
+                    $properties = $this->model->orderPropertiesDescHab();//?sortby=habitaciones&order=DESC
+                }
+               elseif(isset($_GET['filterByType'])){
+                    $properties = $this->model->ShowByType($tipo);//?filterByType=tipo
+                }
+            }
+              else{
+                 $properties = $this->model->getAll();
+              } 
+            
+            return $this->view->response($properties, 200);
+        
     }
 
     public function getProperty($params = null){

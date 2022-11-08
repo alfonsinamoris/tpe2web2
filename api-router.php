@@ -12,6 +12,7 @@ $router->addRoute('property/:ID', 'GET', 'ApiController', 'getProperty');
 $router->addRoute('property/:ID', 'DELETE', 'ApiController', 'deleteProperty');
 $router->addRoute('property', 'POST', 'ApiController', 'insertProperty'); 
 $router->addRoute('property/:ID','PUT','ApiController','updateProperty');
+
 $router->addRoute("auth/token", 'GET', 'AuthApiController', 'getToken');
 
 // ejecuta la ruta (sea cual sea)

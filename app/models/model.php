@@ -51,4 +51,12 @@ class PropertyModel{
         $properties= $query->fetchAll(PDO::FETCH_OBJ);
         return $properties;
     }
+
+
+    public function ShowByType($tipo){
+        $query = $this->db->prepare("SELECT * FROM propiedades WHERE tipo = ?");
+        $query->execute([$tipo]);
+        $properties= $query->fetchAll(PDO::FETCH_OBJ);
+        return $properties;
+    }
 }
