@@ -100,7 +100,7 @@ class PropertyModel{
         $properties= $query->fetchAll(PDO::FETCH_OBJ);
         return $properties;
     }
-    
+
     public function orderPropertiesDescPrecio(){
         $query = $this->db->prepare("SELECT * FROM propiedades ORDER BY precio ASC");
         $query->execute();
@@ -114,4 +114,5 @@ class PropertyModel{
         $properties= $query->fetchAll(PDO::FETCH_OBJ);
         return $properties;
     }
+
 }

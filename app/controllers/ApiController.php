@@ -61,16 +61,16 @@ class ApiController {
                     }
                 }
             }    
-               elseif(isset($_GET['filterByType'])){
-                    $properties = $this->model->ShowByType($_GET['filterByType']);//?filterByType=tipo
-                }
-              else{
+            elseif(isset($_GET['filterByType'])){
+                $properties = $this->model->ShowByType($_GET['filterByType']);//?filterByType=tipo
+            }
+            else{
                  $properties = $this->model->getAll();
               } 
             
-            return $this->view->response($properties, 200);
-        
+        return $this->view->response($properties, 200);
     }
+
 
     public function getProperty($params = null){
         $id = $params[':ID'];
