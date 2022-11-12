@@ -19,8 +19,9 @@ class ApiController {
     }
 
     public function getProperties(){
+        try{
             if(isset($_GET['order'])&& isset($_GET['sortby'])){
-                //FITRA ASC Y DESC POR HABITACIONES
+                    //FITRA ASC Y DESC POR HABITACIONES
                 if($_GET['sortby']=="habitaciones"){ 
                     if($_GET['order']=="ASC"){
                         $properties = $this->model->orderPropertiesAscHab();//?sortby=habitaciones&order=ASC
@@ -60,7 +61,7 @@ class ApiController {
                         $properties = $this->model->orderPropertiesDescPrecio();//?sortby=precio&order=DESC
                     }
                 }
-            }    
+            }   
             elseif(isset($_GET['filterByType'])){
                 $properties = $this->model->ShowByType($_GET['filterByType']);//?filterByType=tipo
             }
@@ -69,6 +70,10 @@ class ApiController {
               } 
             
         return $this->view->response($properties, 200);
+         }
+         catch (Exception $e){
+            $this->view->response(400);
+         }
     }
 
 
