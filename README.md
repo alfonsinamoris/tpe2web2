@@ -1,6 +1,7 @@
 # tpe2web2
 <h1>ENDPOINTS</h1>
-<p> URL:web2/tpe2/api/property method:GET, trae todo de la base de datos </p>
+## GET ALL
+<p> URL:http://localhost/web2/tpe2/api/property  method:**GET** </p>
 <p> URL:web2/tpe2/api/property:ID method: GET, trae por id </p>
 <p> URL:web2/tpe2/api/property:ID method: DELETE, borra por id </p>
 <p> URL:web2/tpe2/api/property method:POST ,body:{
