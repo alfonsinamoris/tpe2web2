@@ -8,19 +8,19 @@
 <p> URL:http://localhost/web2/tpe2/api/property:ID <strong>method: DELETE</strong></p>
 <h2>POST</h2>
 <p> URL:http://localhost/web2/tpe2/api/property <strong>method:POST</strong> body:{
-        "direccion": "pinto 444",
-        "tipo": "2",
-        "habitaciones": "3",
-        "precio": "20000",
-        "alquiler_venta": "alquier"
+        "direccion": "",
+        "tipo": "",
+        "habitaciones": "",
+        "precio": "",
+        "alquiler_venta": ""
     } </p>
 <h2>EDIT BY ID</h2>
 <p> URL:http://localhost/web2/tpe2/api/property:ID <strong>method:PUT</strong> body:   {
-        "direccion": "pinto 444",
-        "tipo": "2",
-        "habitaciones": "3",
-        "precio": "20000",
-        "alquiler_venta": "alquier"
+        "direccion": "",
+        "tipo": "",
+        "habitaciones": "",
+        "precio": "",
+        "alquiler_venta": ""
     }</p>
 <h2>ORDER BY COLUMN ASC OR DESC</h2>
 <p> URL:http://localhost/web2/tpe2/api/property?sortby=columna&order=ASC/DESC <strong>method:GET</strong></p>
