@@ -23,39 +23,39 @@ class ApiController {
             if(isset($_GET['order'])&& isset($_GET['sortby'])){
                     //FITRA ASC Y DESC POR HABITACIONES
                 if($_GET['sortby']=="habitaciones"){ 
-                    if($_GET['order']=="ASC"){
+                    if($_GET['order']=="asc"){
                         $properties = $this->model->orderPropertiesAscHab();//?sortby=habitaciones&order=ASC
-                    }elseif ($_GET["order"] == "DESC") {
+                    }elseif ($_GET["order"] == "desc") {
                         $properties = $this->model->orderPropertiesDescHab();//?sortby=habitaciones&order=DESC
                     }
                 }
                 //FILTRA ASC Y DESC POR ID
                 elseif($_GET["sortby"] == "id"){
-                    if($_GET['order']=="ASC")
+                    if($_GET['order']=="asc")
                         $properties = $this->model->orderPropertiesAscID();//?sortby=id&order=ASC
-                    elseif ($_GET["order"] == "DESC") {
+                    elseif ($_GET["order"] == "desc") {
                         $properties = $this->model->orderPropertiesDescID();//?sortby=id&order=DESC
                     }
                 }
                 //FILTRA ASC Y DESC POR DIRECCION
                 elseif($_GET["sortby"] == "direccion"){
-                    if($_GET['order']=="ASC")
+                    if($_GET['order']=="asc")
                         $properties = $this->model->orderPropertiesAscDirec();//?sortby=direccion&order=ASC
-                    elseif ($_GET["order"] == "DESC") {
+                    elseif ($_GET["order"] == "desc") {
                         $properties = $this->model->orderPropertiesDescDirec();//?sortby=direccion&order=DESC
                     }
                 }
                 //FILTRA ASC Y DESC POR TIPO
                 elseif($_GET["sortby"] == "tipo"){
-                    if($_GET['order']=="ASC")
+                    if($_GET['order']=="asc")
                         $properties = $this->model->orderPropertiesAscTipo();//?sortby=tipo&order=ASC
-                    elseif ($_GET["order"] == "DESC") {
+                    elseif ($_GET["order"] == "desc") {
                         $properties = $this->model->orderPropertiesDescTipo();//?sortby=tipo&order=DESC
                     }
                 }
                 //FILTRA ASC Y DESC POR PRECIO
                 elseif($_GET["sortby"] == "precio"){
-                    if($_GET['order']=="ASC")
+                    if($_GET['order']=="asc")
                         $properties = $this->model->orderPropertiesAscPrecio();//?sortby=precio&order=ASC
                     elseif ($_GET["order"] == "DESC") {
                         $properties = $this->model->orderPropertiesDescPrecio();//?sortby=precio&order=DESC
